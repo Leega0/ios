@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>html5 icon for css3</title>
 	<link rel="stylesheet" href="cs/style.css">
+	<script src="http://s0.qhimg.com/lib/jquery/183.js"></script>
 </head>
 <body>
 	<!-- start -->
@@ -25,6 +26,127 @@
 				<div class="h"></div>
 				<div class="s"></div>
 			</div>
+		</div>
+		<!-- page -->
+		<div class="page">
+		<!-- imessage -->
+			<div class="imessage icon">
+				<div class="c"></div>
+				<div class="t"></div>
+			</div>
+		<!-- clock -->
+			<div class="clock icon">
+				<div class="c">
+					<div class="n">
+						<div class="n12">12</div>
+						<div class="n11">11</div>
+						<div class="n10">10</div>
+						<div class="n9">9</div>
+						<div class="n8">8</div>
+						<div class="n7">7</div>
+						<div class="n6">6</div>
+						<div class="n5">5</div>
+						<div class="n4">4</div>
+						<div class="n3">3</div>
+						<div class="n2">2</div>
+						<div class="n1">1</div>
+					</div>
+					<div class="db"></div>
+					<div class="h"></div>
+					<div class="m"></div>
+					<div class="dr"></div>
+					<div class="s"></div>
+				</div>
+			</div>
+			<!-- calendar -->
+			<div class="calendar icon">
+				<div class="w"></div>
+				<div class="d"></div>
+			</div>
+			<script>
+			var assist={
+				compass:{
+					// 指南针环形指示线生成
+					init:function(){
+						var html="";
+						var i=0;
+						var len=60;
+						for(;i<len;i++){
+							if (i%4==2) {
+								html += "<div class='z zl' style='-webkit-transform:rotate("+ i*6 +"deg); -o-transform:rotate( "+ i*6 +"deg); -moz-transform:rotate("+ i*6 +"deg); '></div>";
+							}
+							else{
+								html +="<div class='z' style='-webkit-transform:rotate("+ i*6 +"deg);-o-transform:rotate( "+ i*6 +"deg); -moz-transform:rotate("+ i*6 +"deg); '></div>";
+							}
+						}
+						$(".compass").append( html );
+					}
+				},
+				safari:{
+					init:function(){
+						var html="";
+						var i=0;
+						var len=60;
+						for(;i<len;i++){
+							if( i%2 == 1 ){
+                        html += "<div class='x1' style='-webkit-transform:rotate("+ i*6 +"deg); -o-transform:rotate( "+ i*6 +"deg); -moz-transform:rotate("+ i*6 +"deg); '></div>";
+                    }
+                    else{
+                        html += "<div class='x2' style='-webkit-transform:rotate("+ i*6 +"deg); -o-transform:rotate( "+ i*6 +"deg); -moz-transform:rotate("+ i*6 +"deg); '></div>";
+                    }
+						}
+						$(".safari .x").append(html);
+					}
+				},
+				clock:{
+					init:function(){
+						assist.clock.startMoving();
+					},
+					startMoving:function(){
+						var hc=$(".clock .h");
+						var mc=$(".clock .m");
+						var sc=$(".clock .s");
+						var date=new Date();
+						var h=date.getHours();
+						var m=date.getMinutes();
+						var s=date.getSeconds();
+						sc.css({
+							"-webkit-transform":"rotate("+(s*6-90)+"deg)",
+							"-moz-transform":"rotate("+(s*6-90)+"deg)",
+							"o-transform":"rotate("+(s*6-90)+"deg)"
+						});
+						 mc.css({
+                   		    "-webkit-transform" :  "rotate("+ (m*6 + s/10 -90) +"deg)",
+                    	    "-moz-transform" :  "rotate("+ (m*6 + s/10 -90) +"deg)",
+                    	    "-o-transform" :  "rotate("+ (m*6 + s/10 -90) +"deg)"
+                        });
+                		hc.css({
+                    	    "-webkit-transform" :  "rotate("+ (h*30 + m /2 -90) +"deg)",
+                    		"-moz-transform" :  "rotate("+ (h*30 + m /2 -90) +"deg)",
+                    		"-o-transform" :  "rotate("+ (h*30 + m /2 -90) +"deg)"
+                		})
+                setTimeout( function (){
+                    assist.clock.startMoving();
+                },1000)
+					}
+				},
+				calendar:{
+					init:function(){
+						var date=new Date();
+						$(".calendar .d").html(date.getDate());
+						$(".calendar .w").html(
+							['星期日','星期一','星期二','星期三','星期四','星期五','星期六'][date.getDay()]
+							);
+					}
+				}
+			};
+			$(function(){
+				assist.compass.init();
+				assist.safari.init();
+				assist.calendar.init();
+				assist.clock.init();
+			})
+			</script>
 		</div>
 	</div>
 </body>
